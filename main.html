@@ -1,16 +1,83 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Color Changer</title>
+    <style>
+        #grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
 
+        .grid-item {
+            width: 100px;
+            height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
+
+<div>
+    <label for="block_id">Enter Block ID (1-9): </label>
+    <input type="number" id="block_id" min="1" max="9">
+</div>
+
+<div>
+    <label for="colour_id">Enter Color: </label>
+    <input type="color" id="colour_id">
+</div>
+
+<div>
+    <button id="change_button" onclick="changeColor()">Change Color</button>
+    <button id="reset_button" onclick="resetColors()">Reset</button>
+</div>
+
+<div id="grid-container">
+    <div id="1" class="grid-item">1</div>
+    <div id="2" class="grid-item">2</div>
+    <div id="3" class="grid-item">3</div>
+    <div id="4" class="grid-item">4</div>
+    <div id="5" class="grid-item">5</div>
+    <div id="6" class="grid-item">6</div>
+    <div id="7" class="grid-item">7</div>
+    <div id="8" class="grid-item">8</div>
+    <div id="9" class="grid-item">9</div>
+</div>
+
+<script>
+    function changeColor() {
+        var blockId = document.getElementById("block_id").value;
+        var color = document.getElementById("colour_id").value;
+
+        if (blockId >= 1 && blockId <= 9) {
+            document.getElementById(blockId).style.backgroundColor = color;
+            resetOtherColors(blockId);
+        } else {
+            alert("Please enter a valid block ID (1-9).");
+        }
+    }
+
+    function resetOtherColors(excludeId) {
+        for (var i = 1; i <= 9; i++) {
+            if (i != excludeId) {
+                document.getElementById(i).style.backgroundColor = 'transparent';
+            }
+        }
+    }
+
+    function resetColors() {
+        for (var i = 1; i <= 9; i++) {
+            document.getElementById(i).style.backgroundColor = 'transparent';
+        }
+    }
 </script>
 
 </body>
-
 </html>
